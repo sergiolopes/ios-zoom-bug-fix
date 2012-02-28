@@ -1,0 +1,131 @@
+/*
+ * Using media queries for a responsive design becomes tricky now that a portrait iphone/ipod
+ * reports width:480px and a portrait iphone reports width:1024px.
+ *
+ * In this section we showcase the most common media queries people use in responsive designs
+ * and how to rewrite them to target iOS correctly after the bug fix hack.
+ */
+
+ /* base */
+ body { background: #11;}
+ h3:after { content: 'Less than 320px. Can be an old IE or a feature phone.';}
+
+ /* portrait phone  */
+@media screen and (min-width: 320px) {
+	body { background: #444; }
+	h3:after { content: 'More than 320px. Usually a portrait phone.';}
+}
+
+/* landscape phone: 
+	usually people do this:
+		@media screen and (min-width: 480px) 
+
+	we need a new expression that doesn't match portrait iphone that now wrongly reports width:480px.
+	below, the first expression target all normal phones where a 480px device-width will mean a 480px width.
+
+	the second expression targets iphone in landscape; for precaution, we restrict the device dimensions exactly
+	to 320x480 an then look for a big reported width (480) with a low height (320 max), meaning we are in landscape.
+	(note: we don't use (orientation:landscape) here since old iOS devices don't support this)
+*/
+@media only screen and (min-width: 480px) and (min-device-width: 480px), only screen and (device-height: 480px) and (device-width: 320px) and (width: 480px) and (max-height: 320px) {
+	body { background: #448; }
+	h3:after { content: 'More than 480px. Possibly a landscape phone or a small tablet.';}
+}
+
+/* portrait tablet */
+@media screen and (min-width: 768px) {
+	body { background: #484; }
+	h3:after { content: 'More than 768px. Looks like a portrait iPad or big tablet.';}
+}
+
+/* big screens:
+	some people like to do this:
+		@media screen and (min-width: 992px)
+
+	this expression now target a portrait ipad too. if that's a problem, we need a new media query to target normal 992px 
+	screens and landscape ipad but excluding ipad's wrongly reported width:1024px after the hack.
+
+	the expression is similar to the one used in (min-width:480px); we just adapted the values to target ipad.
+*/
+@media only screen and (min-width: 992px) and (min-device-width: 992px), only screen and (device-height: 1024px) and (device-width: 768px) and (width: 1024px) and (max-height: 768px) {
+	body { background: #844; }
+	h3:after { content: 'More than 992px. Desktops and landscape tablets.';}
+}
+
+/* landscape ipad (exactly): 
+	usually people do this:
+		@media screen and (min-width: 1024px)
+
+	the new expression below is similar to the landscape iphone above; we just changed the values to target ipad.
+	see the explanation above
+*/
+@media only screen and (min-width: 1024px) and (min-device-width: 1024px), only screen and (device-height: 1024px) and (device-width: 768px) and (width: 1024px) and (max-height: 768px) {
+	body { background: #884; }
+	h3:after { content: 'More than 1024px. Specifically a landscape iPad, but also other big screens.';}
+}
+
+/* really big screens */
+@media only screen and (min-width: 1200px) {
+	body { background: #488; }
+	h3:after { content: 'More than 1200px. Huge screens, like a full screen Desktop browser!';}
+}
+
+
+/*******************************************/
+/* Simple CSS to showcase the project demo */
+/*        (nothing interesting here)       */
+/*******************************************/
+
+body {
+	font-size: 10px;
+	font-family: Arial;
+	padding: 0;
+	margin: 0;
+}
+div, strong, em, h2, li {
+	margin: 0;
+	padding: 0;
+	font-weight: normal;
+	font-style: normal;	
+}
+hgroup, ul, section {
+	margin: 20px auto;
+	width: 90%;
+}
+hgroup {
+	margin-left: 20px;
+}
+h1, h2 {
+	color: #eef;
+	font: 32px Tahoma;
+	margin: 0;
+	text-shadow: 1px 1px #333;
+}
+h2 {
+	color: #dde;
+	font-size: 24px;
+	margin-left: 30px;
+}
+h3 {
+	background: white;
+	display: inline-block;
+	font-weight: normal;
+	margin: 10px auto;
+	padding: 10px;
+	width: auto;
+}
+p {
+	color: #cce;
+	font-size: 1.5em;
+	margin: 0 0 20px 0;
+	width: 90%;
+}
+ul {
+	width: 80%;
+}
+li {
+	font-size: 1.8em;
+}
+a {
+	color: #ccf;
+}
