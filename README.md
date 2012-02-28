@@ -55,6 +55,30 @@ If you do, this will stop working on iOS when you use this script. You'll need a
 
 For a real use of this media queries, including a **bullet proof version targeting non-iOS devices** as well, see the [demos CSS](https://github.com/sergiolopes/ios-zoom-bug-fix/blob/gh-pages/demos/style.css).
 
+Other tricks
+------------
+
+If you don't want to give your wrapper div a `container` id, you can configure another id name via `<body data-container="myid">`.
+
+For performance reasons, it's recommended that the script is called at the bottom of the page. But your users will see a small screen flick effect when visiting the page on portrait mode. If you want to avoid this, you can put the script right after the opening `container` div.
+
+Real world demos
+----------------
+
+I applied the hack to two famous responsive mobile sites to see how it would act in the real world.
+
+**Colly.com**
+
+* [Original Version](http://colly.com/). Has user zooming enabled but suffers the iOS zoom bug.
+* [Fixed version](http://sergiolopes.github.com/ios-zoom-bug-fix/demos/real-world/colly/index.html). Keeps zoom and fixes the bug for iOS.
+
+**BostonGlobe.com**
+
+* [Original Version](http://www.bostonglobe.com). Disables user zooming with `minimum-scale=1, maximum-scale=1`.
+* [Fixed version](http://sergiolopes.github.com/ios-zoom-bug-fix/demos/real-world/bostonglobe/index.html). Reenables user zooming and works flawless everywhere, including iOS. 
+
+(TODO: still needs to adjust the media queries not to target portrait iOS as landscape)
+
 Other solutions
 ---------------
 
