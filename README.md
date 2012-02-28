@@ -82,8 +82,7 @@ I applied the hack to two famous responsive mobile sites to see how it would act
 Other solutions
 ---------------
 
-A lot of smart people already thought about this bug, resulting in various
-different solutions. Here are a few knwon solutions and my comments:
+Many smart people have thought about this bug, resulting in several different solutions. Here are some known solutions, and my comments:
 
 * **Disable user zoom.** Not really a solution, but if you add `minimum-scale=1, maximum-scale=1` to your `viewport` the bug disappears. The obvious drawback is to penalize the user, not allowing zooming.
 
