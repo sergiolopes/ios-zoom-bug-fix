@@ -1,6 +1,6 @@
 /*
  * Using media queries for a responsive design becomes tricky now that a portrait iphone/ipod
- * reports width:480px and a portrait iphone reports width:1024px.
+ * reports width:480px and a portrait ipad reports width:1024px.
  *
  * In this section we showcase the most common media queries people use in responsive designs
  * and how to rewrite them to target iOS correctly after the bug fix hack.
@@ -27,7 +27,7 @@
 	to 320x480 an then look for a big reported width (480) with a low height (320 max), meaning we are in landscape.
 	(note: we don't use (orientation:landscape) here since old iOS devices don't support this)
 */
-@media only screen and (min-width: 480px) and (min-device-width: 480px), only screen and (device-height: 480px) and (device-width: 320px) and (width: 480px) and (max-height: 320px) {
+@media screen and (min-width: 480px) and (min-device-width: 480px), screen and (device-height: 480px) and (device-width: 320px) and (width: 480px) and (max-height: 320px) {
 	body { background: #448; }
 	h3:after { content: 'More than 480px. Possibly a landscape phone or a small tablet.';}
 }
@@ -47,7 +47,7 @@
 
 	the expression is similar to the one used in (min-width:480px); we just adapted the values to target ipad.
 */
-@media only screen and (min-width: 992px) and (min-device-width: 992px), only screen and (device-height: 1024px) and (device-width: 768px) and (width: 1024px) and (max-height: 768px) {
+@media screen and (min-width: 992px) and (min-device-width: 992px), screen and (device-height: 1024px) and (device-width: 768px) and (width: 1024px) and (max-height: 768px) {
 	body { background: #844; }
 	h3:after { content: 'More than 992px. Desktops and landscape tablets.';}
 }
@@ -59,13 +59,13 @@
 	the new expression below is similar to the landscape iphone above; we just changed the values to target ipad.
 	see the explanation above
 */
-@media only screen and (min-width: 1024px) and (min-device-width: 1024px), only screen and (device-height: 1024px) and (device-width: 768px) and (width: 1024px) and (max-height: 768px) {
+@media screen and (min-width: 1024px) and (min-device-width: 1024px), screen and (device-height: 1024px) and (device-width: 768px) and (width: 1024px) and (max-height: 768px) {
 	body { background: #884; }
 	h3:after { content: 'More than 1024px. Specifically a landscape iPad, but also other big screens.';}
 }
 
 /* really big screens */
-@media only screen and (min-width: 1200px) {
+@media screen and (min-width: 1200px) {
 	body { background: #488; }
 	h3:after { content: 'More than 1200px. Huge screens, like a full screen Desktop browser!';}
 }
