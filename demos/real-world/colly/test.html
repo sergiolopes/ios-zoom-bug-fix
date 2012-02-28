@@ -1,0 +1,152 @@
+<html>
+	<head>
+		<script type="text/javascript">
+
+		// initial config
+		var test = {
+			url: 'index.html',
+			host: [1280, 768, 28.5],
+			resolutions: [
+				[240, 320, 4.21, 'Feature phone (N95)'],
+				[320, 480, 4.98, 'iPhone portrait'],
+				[480, 320, 7.47, 'iPhone landscape'],
+				//[320, 533, 5.56, 'Galaxy S II portrait'],
+				//[533, 320, 9.24, 'Galaxy S II landscape'],
+				//[600, 800, 9.0, 'Kindle Fire'],
+				[768, 1024, 14.68, 'iPad portrait'],
+				[1024, 768, 19.57, 'iPad landscape']
+			]
+		};
+		</script>
+	</head>
+
+	<body>
+
+		<style type="text/css">
+			body, .test, h1, h2 {
+				-moz-box-sizing : border-box;
+				-webkit-box-sizing : border-box;
+				box-sizing : border-box;
+			}
+			div {
+				position: relative;
+
+				-moz-transform-origin: top left;
+			    -webkit-transform-origin: top left;
+			    -o-transform-origin: top left;
+			    -ms-transform-origin: top left;
+			    transform-origin: top left;
+			}
+			.test {
+				float: left;
+				height: 85%;
+				margin: 0 20px;
+				text-align: left;
+			}
+			h1 {
+				color: #555;
+				font-family: sans-serif;
+				font-size: 20px;
+				font-weight: normal;
+				margin-bottom: 0;
+				text-align: left;
+			}
+			h2 {
+				color: #999;
+				font-family: sans-serif;
+				font-size: 16px;
+				font-weight: normal;
+				margin-top: 0;
+				text-align: left;
+			}
+			iframe {
+				border: 1px solid black;
+				height: 100%; 
+				position: relative;
+				z-index: 0;
+			}
+			span {
+				border-bottom: 1px dotted black;
+				margin: 0;
+				padding: 0;
+				position: absolute;
+				left: 0;
+				width: 100%;
+				z-index: 1;
+			}
+		</style>
+
+		<script type="text/javascript">
+		(function(config, body){
+			var total_width = 100;
+
+			// create single frames
+			for (var i = 0; i < config.resolutions.length; i++) {
+				var resolution = config.resolutions[i];
+
+				// div
+				var div = document.createElement('div');
+				div.className = 'test';
+				body.appendChild(div);
+
+				// h1
+				var h1 = document.createElement('h1');
+				h1.innerText = resolution[0] + 'px x ' + resolution[1] + 'px';
+				div.appendChild(h1);
+
+				// h2
+				var h2 = document.createElement('h2');
+				h2.innerText = resolution[3];
+				div.appendChild(h2);
+
+				// innerDiv
+				var innerDiv = document.createElement('div');
+				innerDiv.style.width = resolution[0];
+				div.appendChild(innerDiv);
+
+				// iframe
+				var iframe = document.createElement('iframe');
+				iframe.src = config.url;
+				iframe.style.width = resolution[0];
+				iframe.style.minHeight = resolution[1];
+				innerDiv.appendChild(iframe);
+
+				// span
+				var span = document.createElement('span');
+				span.style.top = resolution[1];
+				innerDiv.appendChild(span);
+
+				// calculate zoom
+				if (config.host) {
+					var hostDPI = config.host[0] / config.host[2];
+					var phoneDPI = resolution[0] / resolution[2];
+					var zoomFactor = hostDPI / phoneDPI;
+
+					innerDiv.style.webkitTransform = 
+							innerDiv.style.msTransform = 
+							innerDiv.style.oTransform = 
+							innerDiv.style.msTransform = 
+							innerDiv.style.transform = 
+								'scale(' + zoomFactor + ',' + zoomFactor + ')';		
+
+					// iframe height 100% ajusted to new zoom level
+					iframe.style.height = phoneDPI / hostDPI * 100 + '%';
+
+				} else {
+					var zoomFactor = 1;
+				}
+
+				// test size
+				var size = zoomFactor * resolution[0] + 20;
+				div.style.width = size;
+				total_width += size;
+			}
+
+			// main screen should accomodate all variations with horizontal scroll
+			total_width += config.resolutions.length * 40;
+			body.style.width = total_width;
+
+		})(test, document.body);
+		</script>
+	</body>
+</html>
