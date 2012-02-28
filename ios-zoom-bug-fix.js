@@ -10,11 +10,12 @@ if (/iPhone|iPad|iPod/.test(navigator.platform) && navigator.userAgent.indexOf("
 		viewport.content = 'width=device-height';
 
 		// cache DOM elements
-		var container = doc.getElementById('container');
+		var body = doc.body;
+		var container = doc.getElementById(body.getAttribute('data-container') || 'container');
 		var containerStyle = container.style;
 
 		// adjusts body
-		doc.body.style.position = 'relative';
+		body.style.position = 'relative';
 
 		// creates height guard
 		var heightGuard = document.createElement('div');
@@ -25,14 +26,14 @@ if (/iPhone|iPad|iPod/.test(navigator.platform) && navigator.userAgent.indexOf("
 		heightGuardStyle.width = '1px';
 		heightGuardStyle.zIndex = '-1';
 		heightGuardStyle.visibility = 'hidden';
-		doc.body.appendChild(heightGuard);
+		body.appendChild(heightGuard);
 
 		// must know if it's an iPad since it has a different screen proportion
 		var isiPad = /iPad/.test(navigator.platform);
 
 		// fix iOS bug
 		function fix() {
-			// are we in landscape mode? we should scale only in landscape!
+			// are we in portrait mode? we should scale only in portrait!
 			var portrait = win.orientation === 0 || win.orientation === 180;
 			
 			// increases container by device-height/device-width fraction
