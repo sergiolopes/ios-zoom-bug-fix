@@ -3,6 +3,11 @@ A fix to the famous iOS zoom bug on orientation change to portrait
 
 **By Sergio Lopes, from Brazil. Public domain.**
 
+Before you continue
+----------
+
+This bug was officially fixed by Apple on iOS 6. Prior versions still suffer from this problem, so this project may help. Or you can simply ignore this bug for old users and assume that everybody will upgrade to a fixed iOS. I use this strategy now.
+
 Quickstart
 ----------
 
