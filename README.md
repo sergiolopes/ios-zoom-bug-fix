@@ -3,6 +3,8 @@ A fix to the famous iOS zoom bug on orientation change to portrait
 
 **By Sergio Lopes, from Brazil. Public domain.**
 
+I work at [Alura](https://www.alura.com.br) teaching [Front-end](https://www.alura.com.br/cursos-online-front-end) and [Mobile online courses](https://www.alura.com.br/cursos-online-mobile).
+
 Before you continue
 ----------
 
